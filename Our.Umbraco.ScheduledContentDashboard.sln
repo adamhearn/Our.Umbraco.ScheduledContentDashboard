@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.ScheduledContentDashboard", "Our.Umbraco.ScheduledContentDashboard\Our.Umbraco.ScheduledContentDashboard.csproj", "{8E74E991-57AC-4110-8F30-388AECD9078E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69C38DDC-EA37-4A4F-9D3F-2EF5B7147E25}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E74E991-57AC-4110-8F30-388AECD9078E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E74E991-57AC-4110-8F30-388AECD9078E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E74E991-57AC-4110-8F30-388AECD9078E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E74E991-57AC-4110-8F30-388AECD9078E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FD1C1AF-FC0B-4899-AC98-051125140E1E}
+	EndGlobalSection
+EndGlobal

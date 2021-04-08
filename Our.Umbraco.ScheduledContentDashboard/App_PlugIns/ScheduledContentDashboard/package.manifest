@@ -1,0 +1,19 @@
+﻿{
+  "dashboards": [
+    {
+      "alias": "scheduledContentDashboard",
+      "view": "/App_Plugins/ScheduledContentDashboard/dashboard.html",
+      "sections": [ "content" ],
+      "weight": 100
+    }
+  ],
+
+  "javascript": [
+    "~/App_Plugins/ScheduledContentDashboard/Dashboard.Controller.js",
+    "~/App_Plugins/ScheduledContentDashboard/Dashboard.Resources.js"
+  ],
+
+  "css": [
+    "~/App_Plugins/ScheduledContentDashboard/dashboard.css"
+  ]
+}

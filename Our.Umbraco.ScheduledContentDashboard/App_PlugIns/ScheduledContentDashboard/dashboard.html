@@ -1,0 +1,66 @@
+﻿<div ng-controller="ScheduledContentDashboardController as vm" class="clearfix">
+
+    <umb-box>
+        <umb-box-header title-key="scheduledContentDashboard_dashboardTitle" description-key="scheduledContentDashboard_dashboardDescription"></umb-box-header>
+        <umb-box-content>
+
+            <div id="scheduledContentItems">
+
+                <form class="form-inline">
+                    <div class="pull-right content-actions">
+                        <button ng-click="vm.reload()" class="btn icon-refresh" aria-label="scheduledContentDashboard_refresh" localize="title" title="@scheduledContentDashboard_refresh"></button>
+                    </div>
+                </form>
+
+                <div class="umb-listview">
+
+                    <umb-load-indicator ng-show="vm.isLoading"></umb-load-indicator>
+
+                    <table class="table table-hover">
+                        <colgroup>
+                            <col style="width: 30%" />
+                            <col style="width: 10%" />
+                            <col style="width: 10%" />
+                            <col style="width: 50%" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <a href="#" prevent-default class="sortable" ng-click="vm.order()" localize="title" title="@scheduledContentDashboard_changeOrder"><localize key="scheduledContentDashboard_scheduledDate" /></a>
+                                    <i class="icon" ng-class="{'icon-navigation-down': !vm.criteria.ascending, 'icon-navigation-up': vm.criteria.ascending}"></i>
+                                </td>
+                                <td>
+                                    <a href="#" prevent-default><localize key="scheduledContentDashboard_action" /></a>
+                                </td>
+                                <td>
+                                    <a href="#" prevent-default><localize key="scheduledContentDashboard_node" /></a>
+                                </td>
+                                <td>
+                                    <a href="#" prevent-default><localize key="scheduledContentDashboard_content" /></a>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="i in vm.items">
+                                <td title="{{i.ScheduledDate | date: 'medium'}}">{{i.ScheduledDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>{{i.Action}}</td>
+                                <td><span ng-show="i.ContentId > 0"><a ng-href="{{vm.getContentUrl(i)}}" title="Edit" target="_blank">{{i.ContentId}}</a></span></td>
+                                <td>{{i.Name}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr ng-hide="vm.isLoading || vm.items.length > 0">
+                                <td colspan="4">
+                                    <p class="text-center">
+                                        <br />
+                                        <strong><localize key="scheduledContentDashboard_nothingScheduled" /></strong>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </umb-box-content>
+    </umb-box>
+</div>

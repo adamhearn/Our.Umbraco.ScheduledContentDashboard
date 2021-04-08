@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Adam Hearn</Authors>
+    <Company>Our Umbraco</Company>
+    <Description>Adds a custom dashboard within the Content section that lets you view the list of content items that are both scheduled for release and expiration.</Description>
+    <PackageProjectUrl>https://our.umbraco.com/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/adamhearn/Our.Umbraco.ScheduledContentDashboard</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>umbraco, umbraco-cms</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App_PlugIns\ScheduledContentDashboard\Dashboard.Controller.js" />
+    <None Remove="App_PlugIns\ScheduledContentDashboard\dashboard.css" />
+    <None Remove="App_PlugIns\ScheduledContentDashboard\dashboard.html" />
+    <None Remove="App_PlugIns\ScheduledContentDashboard\Dashboard.Resources.js" />
+    <None Remove="App_PlugIns\ScheduledContentDashboard\Lang\en-GB.xml" />
+    <None Remove="App_PlugIns\ScheduledContentDashboard\package.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App_PlugIns\ScheduledContentDashboard\Dashboard.Controller.js">
+      <Pack>true</Pack>
+      <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
+    </Content>
+    <Content Include="App_PlugIns\ScheduledContentDashboard\dashboard.css">
+      <Pack>true</Pack>
+      <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
+    </Content>
+    <Content Include="App_PlugIns\ScheduledContentDashboard\dashboard.html">
+      <Pack>true</Pack>
+      <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
+    </Content>
+    <Content Include="App_PlugIns\ScheduledContentDashboard\Dashboard.Resources.js">
+      <Pack>true</Pack>
+      <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
+    </Content>
+    <Content Include="App_PlugIns\ScheduledContentDashboard\Lang\en-GB.xml">
+      <Pack>true</Pack>
+      <PackagePath>content\App_PlugIns\ScheduledContentDashboard\Lang\</PackagePath>
+    </Content>
+    <Content Include="App_PlugIns\ScheduledContentDashboard\package.manifest">
+      <Pack>true</Pack>
+      <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ensure.That" Version="10.1.0" />
+    <PackageReference Include="UmbracoCms.Web" Version="8.12.2" />
+  </ItemGroup>
+
+</Project>

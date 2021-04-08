@@ -1,0 +1,7 @@
+﻿#scheduledContentItems table {
+    border: none;
+}
+
+#scheduledContentItems .content-actions {
+    margin-bottom: 20px;
+}
