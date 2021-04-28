@@ -2,6 +2,7 @@
 // 2021 Our Umbraco
 //-----------------------------------------------------------------------------
 using System;
+using Newtonsoft.Json;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Models
 {
@@ -16,21 +17,25 @@ namespace Our.Umbraco.ScheduledContentDashboard.Models
         /// <remarks>
         /// Umbraco's unique id for the content
         /// </remarks>
+        [JsonProperty(PropertyName = "id")]
         public int ContentId { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the item
         /// </summary>
+        [JsonProperty( PropertyName = "name" )]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the time at which the content action is scheduled
         /// </summary>
+        [JsonProperty( PropertyName = "scheduledDate" )]
         public DateTime ScheduledDate { get; set; }
 
         /// <summary>
         /// Gets or sets the action type
         /// </summary>
+        [JsonProperty( PropertyName = "action" )]
         public string Action { get; set; }
     }
 }

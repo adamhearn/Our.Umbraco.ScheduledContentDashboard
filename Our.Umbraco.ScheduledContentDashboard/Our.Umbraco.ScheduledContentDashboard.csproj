@@ -6,11 +6,14 @@
     <Authors>Adam Hearn</Authors>
     <Company>Our Umbraco</Company>
     <Description>Adds a custom dashboard within the Content section that lets you view the list of content items that are both scheduled for release and expiration.</Description>
-    <PackageProjectUrl>https://our.umbraco.com/</PackageProjectUrl>
+    <PackageProjectUrl>https://our.umbraco.com/packages/backoffice-extensions/scheduled-content-dashboard/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/adamhearn/Our.Umbraco.ScheduledContentDashboard</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco, umbraco-cms</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +21,7 @@
     <None Remove="App_PlugIns\ScheduledContentDashboard\dashboard.css" />
     <None Remove="App_PlugIns\ScheduledContentDashboard\dashboard.html" />
     <None Remove="App_PlugIns\ScheduledContentDashboard\Dashboard.Resources.js" />
-    <None Remove="App_PlugIns\ScheduledContentDashboard\Lang\en-GB.xml" />
+    <None Remove="App_PlugIns\ScheduledContentDashboard\Lang\en-US.xml" />
     <None Remove="App_PlugIns\ScheduledContentDashboard\package.manifest" />
   </ItemGroup>
 
@@ -39,7 +42,7 @@
       <Pack>true</Pack>
       <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
     </Content>
-    <Content Include="App_PlugIns\ScheduledContentDashboard\Lang\en-GB.xml">
+    <Content Include="App_PlugIns\ScheduledContentDashboard\Lang\en-US.xml">
       <Pack>true</Pack>
       <PackagePath>content\App_PlugIns\ScheduledContentDashboard\Lang\</PackagePath>
     </Content>

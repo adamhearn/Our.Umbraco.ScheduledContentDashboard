@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language>
+  <area alias="dashboardTabs">
+    <key alias="scheduledContentDashboard">Scheduled Content</key>
+  </area>
+  <area alias="scheduledContentDashboard">
+    <key alias="dashboardTitle">Scheduled Content</key>
+    <key alias="dashboardDescription">Lists the content items that have been scheduled. A single content item may appear twice [in correct date order] if it has been scheduled for release and later expiry. Schedule entries may be removed and when doing so, the content item will revert to a Saved state.</key>
+    <key alias="nothingScheduled">There are currently no scheduled content items.</key>
+    <key alias="noMatch">No matching scheduled content items found.</key>
+    <key alias="refresh">Refresh</key>
+    <key alias="remove">Remove</key>
+    <key alias="changeOrder">Change sort order</key>
+    <key alias="scheduledDate">Scheduled Date</key>
+    <key alias="action">Action</key>
+    <key alias="node">Node</key>
+    <key alias="content">Content</key>
+    <key alias="selected">selected</key>
+    <key alias="of">of</key>
+    <key alias="clearSelection">Clear selection</key>
+  </area>
+</language>

@@ -53,6 +53,10 @@ namespace Our.Umbraco.ScheduledContentDashboard.Composers
                     {
                         Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.GetScheduledContent )[0] ) + nameof( ScheduledContentDashboardController.GetScheduledContent ).Substring( 1 ),
                         urlHelper.GetUmbracoApiService<ScheduledContentDashboardController>( nameof( ScheduledContentDashboardController.GetScheduledContent ), (RouteValueDictionary) null )
+                    },
+                    {
+                        Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.DeleteScheduleEntry )[0] ) + nameof( ScheduledContentDashboardController.DeleteScheduleEntry ).Substring( 1 ),
+                        urlHelper.GetUmbracoApiService<ScheduledContentDashboardController>( nameof( ScheduledContentDashboardController.DeleteScheduleEntry ), (RouteValueDictionary) null )
                     }
                 };
             e.Add( PackageConstants.PackageName, urlDictionary );

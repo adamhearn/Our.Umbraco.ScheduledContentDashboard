@@ -5,20 +5,26 @@
     angular.module('umbraco.resources').factory('scheduledContentDashboardResources', function ($http, umbRequestHelper) {
 
         return {
-            getScheduledContent: function (criteria) {
+            getScheduledContent: function (orderBy, orderDirection) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(Umbraco.Sys.ServerVariables.ScheduledContentDashboard.getScheduledContent, {
                         params: {
-                            sortAscending: criteria.ascending
+                            orderBy: orderBy,
+                            orderDirection: orderDirection
                         }
                     })
                 );
             },
-            getContentUrl: function (item) {
-                if (item === null || item.ContentId === 0) {
-                    return null;
-                }
-                return "#/content/content/edit/" + item.ContentId;
+            deleteScheduleEntry: function (id, action, scheduledDate) {
+                return umbRequestHelper.resourcePromise(
+                    $http.get(Umbraco.Sys.ServerVariables.ScheduledContentDashboard.deleteScheduleEntry, {
+                        params: {
+                            contentId: id,
+                            scheduleAction: action,
+                            scheduleEntryDate: scheduledDate
+                        }
+                    })
+                );
             }
         };
     });

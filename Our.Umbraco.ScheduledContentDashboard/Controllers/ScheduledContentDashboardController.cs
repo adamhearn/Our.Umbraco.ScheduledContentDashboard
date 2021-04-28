@@ -67,9 +67,12 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         /// <param name="sortAscending">Sort direction</param>
         /// <returns>Collection containing the content that is scheduled if any else an empty collection</returns>
         [HttpGet]
-        public IHttpActionResult GetScheduledContent( bool sortAscending = true )
+        public IHttpActionResult GetScheduledContent( string orderBy, string orderDirection )
         {
-            _logger.Info<ScheduledContentDashboardController>( $"Scheduled content requested, ascending sort order: {sortAscending}" );
+            Ensure.Any.HasValue<string>( orderBy, nameof( orderBy ) );
+            Ensure.Any.HasValue<string>( orderDirection, nameof( orderDirection ) );
+
+            _logger.Info<ScheduledContentDashboardController>( $"Scheduled content requested, sort column: {orderBy}, direction: {orderDirection}" );
 
             // Retrieve the content that is scheduled for release and map the results
             IEnumerable<IContent> results = _contentService.GetContentForRelease( DateTime.MaxValue );
@@ -80,10 +83,34 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
             model = model.Concat( _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Expire, results ) ) );
 
             // Order the results
-            model = sortAscending ? model.OrderBy( x => x.ScheduledDate ) : model.OrderByDescending( x => x.ScheduledDate );
+            // TODO - apply the column selection via reflective lookup on the class against PropertyName of JsonProperty attribute
+            model = orderDirection == "asc" ? model.OrderBy( x => x.ScheduledDate ) : model.OrderByDescending( x => x.ScheduledDate );
 
             // Return the requested data set
             return Ok( model );
+        }
+
+        /// <summary>
+        /// Retrieve the content items that are scheduled for release
+        /// </summary>
+        /// <param name="sortAscending">Sort direction</param>
+        /// <returns>Collection containing the content that is scheduled if any else an empty collection</returns>
+        [HttpGet]
+        public IHttpActionResult DeleteScheduleEntry( int contentId, ContentScheduleAction scheduleAction, DateTime scheduleEntryDate )
+        {
+            Ensure.Any.HasValue<int>( contentId, nameof( contentId ) );
+            Ensure.Any.HasValue<DateTime>( scheduleEntryDate, nameof( scheduleEntryDate ) );
+
+            _logger.Info<ScheduledContentDashboardController>( $"Schedule entry removal requested, Content Id: {contentId}, Action {scheduleAction}, Date: {scheduleEntryDate}" );
+
+            // Retrieve the content that is scheduled for release
+            IContent content = _contentService.GetById( contentId );
+
+            // Clear the specific schedule entry and persist the change
+            content.ContentSchedule.Clear( scheduleAction, scheduleEntryDate );
+            _contentService.Save( content );
+
+            return Ok();
         }
     }
 }
