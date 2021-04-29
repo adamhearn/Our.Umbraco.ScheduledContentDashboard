@@ -105,6 +105,13 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
 
             // Retrieve the content that is scheduled for release
             IContent content = _contentService.GetById( contentId );
+            if( content == null )
+            {
+                return NotFound();
+            }
+
+            // TODO - There's something not working with Umbraco's Content cache on cold start and removing content schedule entries
+            content = _contentService.GetById( contentId );
 
             // Clear the specific schedule entry and persist the change
             content.ContentSchedule.Clear( scheduleAction, scheduleEntryDate );
