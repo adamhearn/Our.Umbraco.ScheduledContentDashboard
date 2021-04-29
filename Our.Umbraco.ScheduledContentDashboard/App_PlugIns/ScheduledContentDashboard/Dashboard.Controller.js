@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module("umbraco").controller("ScheduledContentDashboardController",
-        function (userService, listViewHelper, dateHelper, notificationsService, scheduledContentDashboardResources, $q) {
+        function (userService, listViewHelper, dateHelper, notificationsService, scheduledContentDashboardResources, $q, overlayService, localizationService) {
 
             var vm = this;
 
@@ -97,8 +97,28 @@
                     });
             }
 
-            // Remove content item schedule entries
-            vm.remove = function () {
+            // Delete content item schedule entries (there's no recycle bin)
+            vm.delete = function () {
+
+                const dialog = {
+                    submitButtonLabelKey: "scheduledContentDashboard_yesDelete",
+                    submitButtonStyle: "danger",
+                    submit: function (model) {
+                        performDelete();
+                        overlayService.close();
+                    },
+                    close: function () {
+                        overlayService.close();
+                    }
+                };
+
+                localizationService.localize("scheduledContentDashboard_confirmdelete").then(value => {
+                    dialog.title = value;
+                    overlayService.open(dialog);
+                });
+            };
+
+            function performDelete() {
                 // Ensure UI shows activity
                 vm.actionInProgress = true;
 

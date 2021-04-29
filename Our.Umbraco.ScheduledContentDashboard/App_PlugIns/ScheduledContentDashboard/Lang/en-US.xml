@@ -9,7 +9,9 @@
     <key alias="nothingScheduled">There are currently no scheduled content items.</key>
     <key alias="noMatch">No matching scheduled content items found.</key>
     <key alias="refresh">Refresh</key>
-    <key alias="remove">Remove</key>
+    <key alias="delete">Delete</key>
+    <key alias="yesDelete">Yes, delete</key>
+    <key alias="confirmdelete">Are you sure you wish to delete the selected scheduled entries?</key>
     <key alias="changeOrder">Change sort order</key>
     <key alias="scheduledDate">Scheduled Date</key>
     <key alias="action">Action</key>
