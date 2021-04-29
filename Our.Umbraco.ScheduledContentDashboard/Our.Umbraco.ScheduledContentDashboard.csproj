@@ -5,15 +5,20 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Adam Hearn</Authors>
     <Company>Our Umbraco</Company>
-    <Description>Adds a custom dashboard within the Content section that lets you view the list of content items that are both scheduled for release and expiration.</Description>
+    <Description>Adds a custom dashboard within the Content section that lets you view the list of content items that are both scheduled for release and expiration. You can:
+
+- Filter the list by content name
+- Delete selected scheduled items
+- Sort by any column (ascending or descending)
+- Refresh the list</Description>
     <PackageProjectUrl>https://our.umbraco.com/packages/backoffice-extensions/scheduled-content-dashboard/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/adamhearn/Our.Umbraco.ScheduledContentDashboard</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco, umbraco-cms</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
-    <Version>1.1.1</Version>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

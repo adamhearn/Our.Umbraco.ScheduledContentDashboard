@@ -25,6 +25,8 @@
             vm.clickItem = clickItem;
             vm.selectAll = selectAll;
             vm.isSelectedAll = isSelectedAll;
+            vm.isSortDirection = isSortDirection;
+            vm.sort = sort;
             vm.clearSelection = clearSelection;
             vm.getContent = getContent;
 
@@ -48,11 +50,24 @@
                 listViewHelper.selectHandler(item, $index, vm.items, vm.selection, $event);
             }
 
+            function isSortDirection(col, direction) {
+                // Is the specified field the current sort pattern
+                return vm.options.orderBy === col && vm.options.orderDirection === direction;
+            }
+
+            function sort(field, allow, isSystem) {
+                // Allow sorting on all fields
+                listViewHelper.setSorting(field, true, vm.options);
+
+                // Need to retrieve the content again as the sort order has changed
+                getContent();
+            }
+
             // Fetch the data from the API endpoint
             function getContent() {
                 // Default values
-                vm.isLoading = true;
                 vm.items = null;
+                vm.selection = [];
                 vm.buttonState = "busy";
 
                 scheduledContentDashboardResources.getScheduledContent(vm.options.orderBy, vm.options.orderDirection)
@@ -75,7 +90,6 @@
                                 vm.items = vm.items.filter(x => ~x.name.toLowerCase().indexOf(vm.options.filter.toLowerCase()));
                             }
                         }
-                        vm.isLoading = false;
                         vm.buttonState = "init";
 
                     }, function (response) {

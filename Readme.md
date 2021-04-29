@@ -1,14 +1,15 @@
 # Umbraco.ScheduledContentDashboard
 
-**Scheduled Content Dashboard** for **Umbraco CMS** (v8+) that provides a custom dashboard within the **Content** section that lets you view the list of content items that are both scheduled for release and expiration.
+**Scheduled Content Dashboard** for **Umbraco CMS** (v8) that provides a custom dashboard within the **Content** section that lets you view the list of content items that are both scheduled for release and expiration.
 
 ## Features ##
 
 The Scheduled Content Dashboard allows you to view the list of scheduled items within your Umbraco site. You can:
 
-- Refresh the list
 - Filter the list by content name
-- Deletion of selected scheduled items
+- Delete selected scheduled items
+- Sort by any column (ascending or descending)
+- Refresh the list
 
 ## Screenshots ##
 

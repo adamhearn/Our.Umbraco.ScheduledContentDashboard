@@ -4,8 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 using EnsureThat;
+using Newtonsoft.Json;
 using Our.Umbraco.ScheduledContentDashboard.Contracts;
 using Our.Umbraco.ScheduledContentDashboard.Models;
 using Umbraco.Core.Logging;
@@ -70,7 +73,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         public IHttpActionResult GetScheduledContent( string orderBy, string orderDirection )
         {
             Ensure.Any.HasValue<string>( orderBy, nameof( orderBy ) );
-            Ensure.Any.HasValue<string>( orderDirection, nameof( orderDirection ) );
+            Ensure.String.Matches( orderDirection, new Regex( "^(asc|desc)$" ), nameof( orderDirection ) );
 
             _logger.Info<ScheduledContentDashboardController>( $"Scheduled content requested, sort column: {orderBy}, direction: {orderDirection}" );
 
@@ -83,8 +86,11 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
             model = model.Concat( _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Expire, results ) ) );
 
             // Order the results
-            // TODO - apply the column selection via reflective lookup on the class against PropertyName of JsonProperty attribute
-            model = orderDirection == "asc" ? model.OrderBy( x => x.ScheduledDate ) : model.OrderByDescending( x => x.ScheduledDate );
+            PropertyInfo pi = typeof( ScheduledContentModel ).GetProperties().Single( p => String.Compare( p.GetCustomAttribute<JsonPropertyAttribute>( false )?.PropertyName, orderBy, true ) == 0 );
+            if( pi != null )
+            {
+                model = orderDirection == "asc" ? model.OrderBy( x => pi.GetValue( x ) ) : model.OrderByDescending( x => pi.GetValue( x ) );
+            }
 
             // Return the requested data set
             return Ok( model );
