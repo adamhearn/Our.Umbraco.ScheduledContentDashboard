@@ -12,12 +12,21 @@ namespace Our.Umbraco.ScheduledContentDashboard.Models
     public class ScheduledContentModel
     {
         /// <summary>
+        /// Gets or sets the content schedule id
+        /// </summary>
+        /// <remarks>
+        /// Umbraco's unique id for the schedule entry
+        /// </remarks>
+        [JsonProperty(PropertyName = "id")]
+        public Guid Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the content id
         /// </summary>
         /// <remarks>
         /// Umbraco's unique id for the content
         /// </remarks>
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty( PropertyName = "contentId" )]
         public int ContentId { get; set; }
 
         /// <summary>
@@ -37,5 +46,11 @@ namespace Our.Umbraco.ScheduledContentDashboard.Models
         /// </summary>
         [JsonProperty( PropertyName = "action" )]
         public string Action { get; set; }
+
+        /// <summary>
+        /// Gets or sets the culture type
+        /// </summary>
+        [JsonProperty( PropertyName = "culture" )]
+        public string Culture { get; set; }
     }
 }

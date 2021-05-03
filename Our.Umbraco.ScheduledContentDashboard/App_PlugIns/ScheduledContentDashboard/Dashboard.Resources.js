@@ -15,13 +15,14 @@
                     })
                 );
             },
-            deleteScheduleEntry: function (id, action, scheduledDate) {
+            deleteScheduleEntry: function (contentId, action, scheduledDate, culture) {
                 return umbRequestHelper.resourcePromise(
                     $http.get(Umbraco.Sys.ServerVariables.ScheduledContentDashboard.deleteScheduleEntry, {
                         params: {
-                            contentId: id,
+                            contentId: contentId,
                             scheduleAction: action,
-                            scheduleEntryDate: scheduledDate
+                            scheduleEntryDate: scheduledDate,
+                            culture: culture
                         }
                     })
                 );

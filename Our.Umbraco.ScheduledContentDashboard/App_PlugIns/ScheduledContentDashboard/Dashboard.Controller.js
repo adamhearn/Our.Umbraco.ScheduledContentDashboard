@@ -11,9 +11,9 @@
                 orderBy: "scheduledDate",
                 orderDirection: "asc",
                 includeProperties: [
-                    { alias: "id", header: "Node" },
                     { alias: "action", header: "Action" },
-                    { alias: "scheduledDate", header: "Scheduled Date" }
+                    { alias: "scheduledDate", header: "Scheduled Date" },
+                    { alias: "culture", header: "Culture" }
                 ],
                 allowBulkDelete: true
             };
@@ -77,7 +77,7 @@
                             // Add the custom object type's properties and adjust the date to the current user's preference
                             userService.getCurrentUser().then(function (currentUser) {
                                 angular.forEach(response, function (item) {
-                                    item.editPath = "content/content/edit/" + item.id;
+                                    item.editPath = "content/content/edit/" + item.contentId;
                                     item.icon = "icon-calendar";
                                     item.selected = false;
                                     item.scheduledDate = dateHelper.getLocalDate(item.scheduledDate, currentUser.locale, 'YYYY-MM-DD HH:mm');
@@ -131,7 +131,7 @@
                 let promises = [];
                 angular.forEach(selectedItems, function (item) {
                     promises.push(
-                        scheduledContentDashboardResources.deleteScheduleEntry(item.id, item.action, item.scheduledDate)
+                        scheduledContentDashboardResources.deleteScheduleEntry(item.contentId, item.action, item.scheduledDate, item.culture)
                             .then(function (response) {
 
                                 const index = vm.items.indexOf(item);
