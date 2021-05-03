@@ -106,9 +106,8 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         {
             Ensure.Any.HasValue<int>( contentId, nameof( contentId ) );
             Ensure.Any.HasValue<DateTime>( scheduleEntryDate, nameof( scheduleEntryDate ) );
-            Ensure.Any.HasValue<string>( culture, nameof( culture ) );
 
-            _logger.Info<ScheduledContentDashboardController>( $"Schedule entry removal requested, Content Id: {contentId}, Action {scheduleAction}, Date: {scheduleEntryDate}, Culture: {culture}" );
+            _logger.Info<ScheduledContentDashboardController>( $"Schedule entry removal requested, Content Id: {contentId}, Action {scheduleAction}, Date: {scheduleEntryDate}, Culture: {culture ?? "null"}" );
 
             // Retrieve the content that is scheduled for release
             IContent content = _contentService.GetById( contentId );
@@ -121,7 +120,14 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
             content = _contentService.GetById( contentId );
 
             // Clear the specific schedule entry and persist the change
-            content.ContentSchedule.Clear( culture, scheduleAction, scheduleEntryDate );
+            if( String.IsNullOrWhiteSpace( culture ) )
+            {
+                content.ContentSchedule.Clear( scheduleAction, scheduleEntryDate );
+            }
+            else
+            {
+                content.ContentSchedule.Clear( culture, scheduleAction, scheduleEntryDate );
+            }
             _contentService.Save( content );
 
             return Ok();
