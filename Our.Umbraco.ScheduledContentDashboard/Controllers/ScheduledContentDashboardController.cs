@@ -40,7 +40,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         /// <summary>
         /// Reference to the object mapper
         /// </summary>
-        private readonly IObjectMapper<IEnumerable<IContent>, IEnumerable<ScheduledContentModel>> _mapper;
+        private readonly IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>> _mapper;
 
         /// <summary>
         /// Initializes a new instance of the ScheduledContentDashboardController class
@@ -51,7 +51,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         /// <param name="logger">Reference to the logger</param>
         /// <param name="contentService">Reference to the content service</param>
         /// <param name="mapper">Reference to the object mapper</param>
-        public ScheduledContentDashboardController( ILogger logger, IContentService contentService, IObjectMapper<IEnumerable<IContent>, IEnumerable<ScheduledContentModel>> mapper )
+        public ScheduledContentDashboardController( ILogger logger, IContentService contentService, IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>> mapper )
         {
             // Validate the request
             Ensure.Any.IsNotNull( logger, nameof( logger ) );
@@ -80,11 +80,11 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
 
             // Retrieve the content that is scheduled for release and map the results
             IEnumerable<IContent> results = _contentService.GetContentForRelease( DateTime.MaxValue );
-            IEnumerable<ScheduledContentModel> model = _mapper.Map( results );
+            IEnumerable<ScheduledContentModel> model = _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Release, results ) );
             
             // Retrieve the content that is scheduled for expiration and add to the results
             results = _contentService.GetContentForExpiration( DateTime.MaxValue );
-            model = model.Concat( _mapper.Map( results ) );
+            model = model.Concat( _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Expire, results ) ) );
 
             // Order the results
             PropertyInfo pi = typeof( ScheduledContentModel ).GetProperties().Single( p => String.Compare( p.GetCustomAttribute<JsonPropertyAttribute>( false )?.PropertyName, orderBy, true ) == 0 );

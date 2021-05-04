@@ -25,7 +25,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Composers
         public void Compose( Composition composition )
         {
             // Mappers
-            composition.Register<IObjectMapper<IEnumerable<IContent>, IEnumerable<ScheduledContentModel>>, ContentToScheduledContentMapper>();
+            composition.Register<IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>>, ContentToScheduledContentMapper>();
 
             // Ensure the component is added to the start up chain
             composition.Components().Append<ScheduledContentDashboardComponent>();
