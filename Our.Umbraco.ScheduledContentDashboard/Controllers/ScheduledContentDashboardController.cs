@@ -81,6 +81,10 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
             // Retrieve the content that is scheduled for release and map the results
             IEnumerable<IContent> results = _contentService.GetContentForRelease( DateTime.MaxValue );
             IEnumerable<ScheduledContentModel> model = _mapper.Map( results );
+            
+            // Retrieve the content that is scheduled for expiration and add to the results
+            results = _contentService.GetContentForExpiration( DateTime.MaxValue );
+            model = model.Concat( _mapper.Map( results ) );
 
             // Order the results
             PropertyInfo pi = typeof( ScheduledContentModel ).GetProperties().Single( p => String.Compare( p.GetCustomAttribute<JsonPropertyAttribute>( false )?.PropertyName, orderBy, true ) == 0 );
