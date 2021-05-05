@@ -73,6 +73,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         [HttpGet]
         public IHttpActionResult GetScheduledContent( string orderBy, string orderDirection )
         {
+            // Validate the request
             Ensure.Any.HasValue<string>( orderBy, nameof( orderBy ) );
             Ensure.String.Matches( orderDirection, new Regex( "^(asc|desc)$" ), nameof( orderDirection ) );
 
@@ -108,6 +109,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         [HttpGet]
         public IHttpActionResult DeleteScheduleEntry( int contentId, ContentScheduleAction scheduleAction, DateTime scheduleEntryDate, string culture )
         {
+            // Validate the request
             Ensure.Any.HasValue<int>( contentId, nameof( contentId ) );
             Ensure.Any.HasValue<DateTime>( scheduleEntryDate, nameof( scheduleEntryDate ) );
 

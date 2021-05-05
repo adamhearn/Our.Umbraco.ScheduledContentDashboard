@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnsureThat;
 using Our.Umbraco.ScheduledContentDashboard.Contracts;
 using Our.Umbraco.ScheduledContentDashboard.Models;
 using Umbraco.Core.Models;
@@ -22,6 +23,9 @@ namespace Our.Umbraco.ScheduledContentDashboard.Mappers
         /// <returns>Mapped object</returns>
         public IEnumerable<ScheduledContentModel> Map( Tuple<ContentScheduleAction, IEnumerable<IContent>> from )
         {
+            // Validate the request
+            Ensure.Any.IsNotNull( from, nameof( from ) );
+            
             // Project the results based on the request into the required model
             return from.Item2.SelectMany( x => x.ContentSchedule.FullSchedule.Where( s => s.Action == from.Item1 ).Select( s => new ScheduledContentModel()
             {
@@ -30,7 +34,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Mappers
                 Name = x.Name,
                 Action = from.Item1.ToString(),
                 ScheduledDate = DateTime.SpecifyKind( s?.Date ?? default, DateTimeKind.Local ),
-                Culture = s?.Culture
+                Culture = s.Culture
             } ) );
         }
     }

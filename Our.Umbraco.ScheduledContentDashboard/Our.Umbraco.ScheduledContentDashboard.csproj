@@ -16,11 +16,12 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco, umbraco-cms</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.3.3.0</AssemblyVersion>
-    <FileVersion>1.3.3.0</FileVersion>
-    <Version>1.3.3</Version>
+    <AssemblyVersion>1.3.4.0</AssemblyVersion>
+    <FileVersion>1.3.4.0</FileVersion>
+    <Version>1.3.4</Version>
     <PackageReleaseNotes>Add support for content variants (languages)
-Used the schedule id to identify the list entry to allow for selection of rows relating to the same content item</PackageReleaseNotes>
+Used the schedule id to identify the list entry to allow for selection of rows relating to the same content item
+General code clean up</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
