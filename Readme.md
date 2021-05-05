@@ -15,7 +15,7 @@ The Scheduled Content Dashboard allows you to view the list of scheduled items w
 
 Example of dashboard content
 
-![ScheduledContentDashboard](https://user-images.githubusercontent.com/13589850/116446150-94112880-a84e-11eb-8998-1319a5224e41.png)
+![ScheduledContentDashboard](https://user-images.githubusercontent.com/13589850/116984810-8da60500-acc3-11eb-94bb-74d1ad50c11b.png)
 
 # Build
 
