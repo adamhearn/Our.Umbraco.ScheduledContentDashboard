@@ -20,5 +20,7 @@
     <key alias="selected">selected</key>
     <key alias="of">of</key>
     <key alias="clearSelection">Clear selection</key>
+    <key alias="deleteFailed">Could not delete scheduled content</key>
+    <key alias="retrieveFailed">Could not retrieve scheduled content</key>
   </area>
 </language>

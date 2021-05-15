@@ -93,7 +93,9 @@
                         vm.buttonState = "init";
 
                     }, function (response) {
-                        notificationsService.error("Error", "Could not retrieve scheduled content");
+                        localizationService.localize("scheduledContentDashboard_retrieveFailed").then(value => {
+                            notificationsService.error("Error", value);
+                        });
                     });
             }
 
@@ -140,7 +142,9 @@
                                 }
 
                             }, function (response) {
-                                notificationsService.error("Error", "Could not remove scheduled content");
+                                localizationService.localize("scheduledContentDashboard_deleteFailed").then(value => {
+                                    notificationsService.error("Error", value);
+                                });
                             }));
                 });
 
