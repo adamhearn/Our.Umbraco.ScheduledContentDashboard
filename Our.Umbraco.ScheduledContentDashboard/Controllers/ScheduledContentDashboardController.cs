@@ -6,17 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Web.Http;
 using EnsureThat;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Our.Umbraco.ScheduledContentDashboard.Contracts;
 using Our.Umbraco.ScheduledContentDashboard.Models;
-using Umbraco.Core.Logging;
-using Umbraco.Core.Models;
-using Umbraco.Core.Services;
-using Umbraco.Web.Editors;
-using Umbraco.Web.Mvc;
-using Umbraco.Web.WebApi;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Web.BackOffice.Controllers;
+using Umbraco.Cms.Web.Common.Attributes;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Controllers
 {
@@ -51,7 +50,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         /// <param name="logger">Reference to the logger</param>
         /// <param name="contentService">Reference to the content service</param>
         /// <param name="mapper">Reference to the object mapper</param>
-        public ScheduledContentDashboardController( ILogger logger, IContentService contentService, IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>> mapper )
+        public ScheduledContentDashboardController( ILogger<ScheduledContentDashboardController> logger, IContentService contentService, IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>> mapper )
         {
             // Validate the request
             Ensure.Any.IsNotNull( logger, nameof( logger ) );
@@ -71,27 +70,30 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         /// <param name="orderDirection">Sort direction</param>
         /// <returns>Collection containing the content that is scheduled if any else an empty collection</returns>
         [HttpGet]
-        public IHttpActionResult GetScheduledContent( string orderBy, string orderDirection )
+        public IActionResult GetScheduledContent( string orderBy, string orderDirection )
         {
             // Validate the request
             Ensure.Any.HasValue<string>( orderBy, nameof( orderBy ) );
             Ensure.String.Matches( orderDirection, new Regex( "^(asc|desc)$" ), nameof( orderDirection ) );
 
-            _logger.Info<ScheduledContentDashboardController>( $"Scheduled content requested, sort column: {orderBy}, direction: {orderDirection}" );
+            _logger.LogInformation( $"Scheduled content requested, sort column: {orderBy}, direction: {orderDirection}" );
 
             // Retrieve the content that is scheduled for release and map the results
             IEnumerable<IContent> results = _contentService.GetContentForRelease( DateTime.MaxValue );
             IEnumerable<ScheduledContentModel> model = _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Release, results ) );
-            
+
             // Retrieve the content that is scheduled for expiration and add to the results
             results = _contentService.GetContentForExpiration( DateTime.MaxValue );
             model = model.Concat( _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Expire, results ) ) );
 
-            // Order the results
-            PropertyInfo pi = typeof( ScheduledContentModel ).GetProperties().Single( p => String.Compare( p.GetCustomAttribute<JsonPropertyAttribute>( false )?.PropertyName, orderBy, true ) == 0 );
-            if( pi != null )
+            if( model.Any() )
             {
-                model = orderDirection == "asc" ? model.OrderBy( x => pi.GetValue( x ) ) : model.OrderByDescending( x => pi.GetValue( x ) );
+                // Order the results
+                PropertyInfo pi = typeof( ScheduledContentModel ).GetTypeInfo().GetProperties().Single( p => String.Compare( p.GetCustomAttribute<JsonPropertyAttribute>( false )?.PropertyName, orderBy, true ) == 0 );
+                if( pi != null )
+                {
+                    model = orderDirection == "asc" ? model.OrderBy( x => pi.GetValue( x ) ) : model.OrderByDescending( x => pi.GetValue( x ) );
+                }
             }
 
             // Return the requested data set
@@ -107,13 +109,13 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
         /// <param name="culture">Culture of schedule action</param>
         /// <returns>Collection containing the content that is scheduled if any else an empty collection</returns>
         [HttpGet]
-        public IHttpActionResult DeleteScheduleEntry( int contentId, ContentScheduleAction scheduleAction, DateTime scheduleEntryDate, string culture )
+        public IActionResult DeleteScheduleEntry( int contentId, ContentScheduleAction scheduleAction, DateTime scheduleEntryDate, string culture )
         {
             // Validate the request
             Ensure.Any.HasValue<int>( contentId, nameof( contentId ) );
             Ensure.Any.HasValue<DateTime>( scheduleEntryDate, nameof( scheduleEntryDate ) );
 
-            _logger.Info<ScheduledContentDashboardController>( $"Schedule entry removal requested, Content Id: {contentId}, Action {scheduleAction}, Date: {scheduleEntryDate}, Culture: {culture ?? "null"}" );
+            _logger.LogInformation( $"Schedule entry removal requested, Content Id: {contentId}, Action {scheduleAction}, Date: {scheduleEntryDate}, Culture: {culture ?? "null"}" );
 
             // Retrieve the content that is scheduled for release
             IContent content = _contentService.GetById( contentId );

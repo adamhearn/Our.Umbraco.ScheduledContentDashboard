@@ -34,6 +34,7 @@
 
             function selectAll() {
                 listViewHelper.selectAllItemsToggle(vm.items, vm.selection);
+                console.log('test log from select all');
             }
 
             function clearSelection() {
@@ -68,7 +69,7 @@
             // Fetch the data from the API endpoint
             function getContent() {
                 // Default values
-                vm.items = [];
+                vm.items = null;
                 vm.selection = [];
                 vm.buttonState = "busy";
 
@@ -82,13 +83,13 @@
                                     item.editPath = "content/content/edit/" + item.contentId;
                                     item.icon = "icon-calendar";
                                     item.selected = false;
-                                    item.scheduledDate = dateHelper.getLocalDate(item.scheduledDate, currentUser.locale, "YYYY-MM-DD HH:mm");
+                                    item.scheduledDate = dateHelper.getLocalDate(item.scheduledDate, currentUser.locale, 'YYYY-MM-DD HH:mm');
                                 });
                             });
                             vm.items = response;
 
                             // Apply any filter
-                            if (vm.options.filter !== "") {
+                            if (vm.options.filter !== '') {
                                 vm.items = vm.items.filter(x => ~x.name.toLowerCase().indexOf(vm.options.filter.toLowerCase()));
                             }
                         }

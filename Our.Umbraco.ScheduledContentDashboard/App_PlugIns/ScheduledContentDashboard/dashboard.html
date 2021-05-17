@@ -41,7 +41,7 @@
 
                 </umb-editor-sub-header-section>
 
-                <umb-editor-sub-header-section ng-show="(vm.items.length > 0 || vm.options.filter.length > 0) && vm.selection.length == 0">
+                <umb-editor-sub-header-section ng-show="(vm.items && vm.items.length > 0 || vm.options.filter.length > 0) && vm.selection.length == 0">
                     <umb-mini-search model="vm.options.filter" on-search="vm.getContent()">
                     </umb-mini-search>
                 </umb-editor-sub-header-section>
@@ -65,7 +65,7 @@
             </umb-editor-sub-header-content-right>
         </umb-editor-sub-header>
 
-        <umb-box-content ng-if="vm.items.length > 0">
+        <umb-box-content ng-if="vm.items && vm.items.length > 0">
             <umb-table items="vm.items"
                        item-properties="vm.options.includeProperties"
                        allow-select-all="vm.options.allowBulkDelete"
@@ -80,7 +80,7 @@
 
     </umb-box>
 
-    <umb-empty-state ng-show="(vm.items.length === 0)" position="center">
+    <umb-empty-state ng-show="(!vm.items || vm.items.length === 0)" position="center">
         <div ng-show="vm.options.filter.length === 0"><localize key="scheduledContentDashboard_nothingScheduled">There are currently no scheduled content items.</localize></div>
         <div ng-show="vm.options.filter.length > 0"><localize key="scheduledContentDashboard_noMatch">There are currently no matching scheduled content items</localize></div>
     </umb-empty-state>

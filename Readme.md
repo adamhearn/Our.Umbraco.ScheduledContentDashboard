@@ -1,6 +1,6 @@
 # Umbraco.ScheduledContentDashboard
 
-**Scheduled Content Dashboard** for **Umbraco CMS** (v8) that provides a custom dashboard within the **Content** section that lets you view the list of content items that are both scheduled for release and expiration.
+**Scheduled Content Dashboard** for **Umbraco CMS** (v9) that provides a custom dashboard within the **Content** section that lets you view the list of content items that are both scheduled for release and expiration.
 
 ## Features ##
 
@@ -20,4 +20,4 @@ Example of dashboard content
 # Build
 
 - Visual Studio 2019
-- NuGet package references for Umbraco 8, Ensure.That
+- NuGet package references for Umbraco 9, Ensure.That

@@ -4,35 +4,36 @@
 using System;
 using System.Collections.Generic;
 using EnsureThat;
+using Microsoft.Extensions.DependencyInjection;
 using Our.Umbraco.ScheduledContentDashboard.Contracts;
 using Our.Umbraco.ScheduledContentDashboard.Mappers;
 using Our.Umbraco.ScheduledContentDashboard.Models;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models;
+using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Events;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Notifications;
+using Umbraco.Cms.Infrastructure.WebAssets;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Startup
-{ 
+{
     /// <summary>
     /// Implementation of <see cref="IUserComposer"/> to support the package
     /// </summary>
-    [RuntimeLevel( MinLevel = RuntimeLevel.Run )]
     public class ScheduledContentDashboardComposer : IUserComposer
     {
         /// <summary>
         /// Compose callback for the user composer
         /// </summary>
         /// <param name="composition">Composition engine</param>
-        public void Compose( Composition composition )
+        public void Compose( IUmbracoBuilder builder )
         {
             // Validate the request
-            Ensure.Any.IsNotNull( composition, nameof( composition ) );
+            Ensure.Any.IsNotNull( builder, nameof( builder ) );
 
             // Mappers
-            composition.Register<IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>>, ContentToScheduledContentMapper>();
-
-            // Ensure the component is added to the start up chain
-            composition.Components().Append<ScheduledContentDashboardComponent>();
+            builder.Services.AddScoped<IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>>, ContentToScheduledContentMapper>();
+            builder.AddNotificationHandler<ServerVariablesParsingNotification, ScheduledContentDashboardNotificationHandler>();
         }
     }
 }

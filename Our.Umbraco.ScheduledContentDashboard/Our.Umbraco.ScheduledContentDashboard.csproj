@@ -1,37 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Our.Umbraco.ScheduledContentDashboard</RootNamespace>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <Version>2.0.1-pre</Version>
     <Authors>Adam Hearn</Authors>
     <Company>Our Umbraco</Company>
-    <Description>Adds a custom dashboard within the Content section that lets you view the list of content items that are both scheduled for release and expiration. You can:
+    <Product>Our.Umbraco.ScheduledContentDashboard</Product>
+    <Description>
+      Adds a custom dashboard within the Content section that lets you view the list of content items that are both scheduled for release and expiration. You can:
 
-- Filter the list by content name
-- Delete selected scheduled items
-- Sort by any column (ascending or descending)
-- Refresh the list</Description>
+      - Filter the list by content name
+      - Delete selected scheduled items
+      - Sort by any column (ascending or descending)
+      - Refresh the list
+    </Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://our.umbraco.com/packages/backoffice-extensions/scheduled-content-dashboard/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/adamhearn/Our.Umbraco.ScheduledContentDashboard</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco, umbraco-cms</PackageTags>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.3.5.0</AssemblyVersion>
-    <FileVersion>1.3.5.0</FileVersion>
-    <Version>1.3.5</Version>
-    <PackageReleaseNotes>Add support for content variants (languages)
-Used the schedule id to identify the list entry to allow for selection of rows relating to the same content item
-General code clean up</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial release for Umbraco v9 beta 2</PackageReleaseNotes>
+    <AssemblyName>Our.Umbraco.ScheduledContentDashboard</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="App_PlugIns\ScheduledContentDashboard\Dashboard.Controller.js" />
-    <None Remove="App_PlugIns\ScheduledContentDashboard\dashboard.css" />
-    <None Remove="App_PlugIns\ScheduledContentDashboard\dashboard.html" />
-    <None Remove="App_PlugIns\ScheduledContentDashboard\Dashboard.Resources.js" />
-    <None Remove="App_PlugIns\ScheduledContentDashboard\Lang\en-US.xml" />
-    <None Remove="App_PlugIns\ScheduledContentDashboard\package.manifest" />
-  </ItemGroup>
 
   <ItemGroup>
     <Content Include="App_PlugIns\ScheduledContentDashboard\Dashboard.Controller.js">
@@ -58,11 +53,16 @@ General code clean up</PackageReleaseNotes>
       <Pack>true</Pack>
       <PackagePath>content\App_PlugIns\ScheduledContentDashboard\</PackagePath>
     </Content>
+    <None Include="build\**\*.*">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Ensure.That" Version="10.1.0" />
-    <PackageReference Include="UmbracoCms.Web" Version="8.12.2" />
+    <PackageReference Include="Umbraco.Cms.Core" Version="9.0.0-beta002" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-beta002" />
   </ItemGroup>
 
 </Project>

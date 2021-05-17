@@ -17,7 +17,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Models
         /// <remarks>
         /// Umbraco's unique id for the schedule entry
         /// </remarks>
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty( PropertyName = "id" )]
         public Guid Id { get; set; }
 
         /// <summary>
