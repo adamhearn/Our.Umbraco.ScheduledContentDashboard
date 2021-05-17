@@ -9,8 +9,8 @@
   ],
 
   "javascript": [
-    "~/App_Plugins/ScheduledContentDashboard/Dashboard.Controller.js",
-    "~/App_Plugins/ScheduledContentDashboard/Dashboard.Resources.js"
+    "~/App_Plugins/ScheduledContentDashboard/Dashboard.Resources.js",
+    "~/App_Plugins/ScheduledContentDashboard/Dashboard.Controller.js"
   ],
 
   "css": [

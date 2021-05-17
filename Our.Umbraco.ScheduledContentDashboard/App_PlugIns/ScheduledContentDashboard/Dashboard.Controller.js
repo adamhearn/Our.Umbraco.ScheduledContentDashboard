@@ -1,5 +1,5 @@
 ﻿(function () {
-    'use strict';
+    "use strict";
 
     angular.module("umbraco").controller("ScheduledContentDashboardController",
         function (userService, listViewHelper, dateHelper, notificationsService, scheduledContentDashboardResources, $q, overlayService, localizationService) {
@@ -7,7 +7,7 @@
             var vm = this;
 
             vm.options = {
-                filter: '',
+                filter: "",
                 orderBy: "scheduledDate",
                 orderDirection: "asc",
                 includeProperties: [
@@ -21,6 +21,8 @@
             vm.buttonState = "init";
             vm.actionInProgress = false;
             vm.selection = [];
+            vm.items = [];
+
             vm.selectItem = selectItem;
             vm.clickItem = clickItem;
             vm.selectAll = selectAll;
@@ -66,7 +68,7 @@
             // Fetch the data from the API endpoint
             function getContent() {
                 // Default values
-                vm.items = null;
+                vm.items = [];
                 vm.selection = [];
                 vm.buttonState = "busy";
 
@@ -80,13 +82,13 @@
                                     item.editPath = "content/content/edit/" + item.contentId;
                                     item.icon = "icon-calendar";
                                     item.selected = false;
-                                    item.scheduledDate = dateHelper.getLocalDate(item.scheduledDate, currentUser.locale, 'YYYY-MM-DD HH:mm');
+                                    item.scheduledDate = dateHelper.getLocalDate(item.scheduledDate, currentUser.locale, "YYYY-MM-DD HH:mm");
                                 });
                             });
                             vm.items = response;
 
                             // Apply any filter
-                            if (vm.options.filter !== '') {
+                            if (vm.options.filter !== "") {
                                 vm.items = vm.items.filter(x => ~x.name.toLowerCase().indexOf(vm.options.filter.toLowerCase()));
                             }
                         }
