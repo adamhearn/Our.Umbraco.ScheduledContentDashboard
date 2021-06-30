@@ -1,88 +1,45 @@
-﻿<div ng-controller="ScheduledContentDashboardController as vm" class="clearfix scheduledContentDashboard">
+﻿<div ng-controller="ScheduledContentDashboardController as vm" class="clearfix">
 
-    <umb-box>
-        <umb-box-header class="umb-box-header_scheduledcontent" title-key="scheduledContentDashboard_dashboardTitle" description-key="scheduledContentDashboard_dashboardDescription"></umb-box-header>
+    <div class="umb-listview">
 
-        <umb-editor-sub-header ng-class="{'--state-selection':(vm.selection.length > 0)}">
+        <umb-load-indicator ng-show="vm.isLoading"></umb-load-indicator>
 
-            <umb-editor-sub-header-content-left>
-                <umb-editor-sub-header-section ng-show="(vm.selection.length > 0)">
-                    <umb-button type="button"
-                                label="Clear selection"
-                                label-key="scheduledContentDashboard_clearSelection"
-                                button-style="white"
-                                action="vm.clearSelection()"
-                                disabled="actionInProgress">
-                    </umb-button>
-                </umb-editor-sub-header-section>
+        <table class="table table-hover">
+            <colgroup>
+                <col style="width: 50%" />
+                <col style="width: 10%" />
+                <col style="width: 30%" />
+                <col style="width: 10%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <td>
+                        <a href="#" prevent-default><localize key="scheduledContentDashboard_content" /></a>
+                    </td>
+                    <td>
+                        <a href="#" prevent-default><localize key="scheduledContentDashboard_node" /></a>
+                    </td>
+                    <td>
+                        <a href="#" prevent-default><localize key="scheduledContentDashboard_scheduledDate" /></a>
+                    </td>
+                    <td>
+                        <a href="#" prevent-default><localize key="scheduledContentDashboard_action" /></a>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in vm.items">
+                    <td>{{i.name}}</td>
+                    <td><span ng-show="i.contentId > 0"><a href="/umbraco/#/{{i.editPath}}" title="Edit">{{i.contentId}}</a></span></td>
+                    <td title="{{i.scheduledDate | date: 'medium'}}">{{i.scheduledDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{i.action}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-                <!-- Need to work out the visibility based on actionInProgress -->
-                <umb-editor-sub-header-section ng-show="(vm.selection.length > 0)">
-                    <strong ng-show="!vm.actionInProgress">{{ vm.selection.length }} <localize key="scheduledContentDashboard_of">of</localize> {{ vm.items.length }} <localize key="scheduledContentDashboard_selected">selected</localize></strong>
-                    <strong ng-show="vm.actionInProgress" ng-bind="bulkStatus"></strong>
-                    <umb-loader position="bottom" ng-show="vm.actionInProgress"></umb-loader>
-                </umb-editor-sub-header-section>
-
-            </umb-editor-sub-header-content-left>
-
-            <umb-editor-sub-header-content-right>
-                <umb-editor-sub-header-section>
-
-                    <umb-editor-sub-header-section ng-show="(vm.selection.length == 0)">
-                        <umb-button class="umb-outline"
-                                    action="vm.getContent()"
-                                    type="button"
-                                    button-style="dashboard"
-                                    state="vm.buttonState"
-                                    icon="icon-refresh"
-                                    disabled="vm.buttonState === 'busy'">
-                        </umb-button>
-                    </umb-editor-sub-header-section>
-
-                </umb-editor-sub-header-section>
-
-                <umb-editor-sub-header-section ng-show="(vm.items.length > 0 || vm.options.filter.length > 0) && vm.selection.length == 0">
-                    <umb-mini-search model="vm.options.filter" on-search="vm.getContent()">
-                    </umb-mini-search>
-                </umb-editor-sub-header-section>
-
-                <umb-editor-sub-header-section ng-show="(vm.selection.length > 0)">
-
-                    <umb-button ng-if="vm.options.allowBulkDelete"
-                                type="button"
-                                button-style="white"
-                                label="Delete"
-                                label-key="scheduledContentDashboard_delete"
-                                icon="icon-delete"
-                                action="vm.delete()"
-                                disabled="vm.buttonState === 'busy'"
-                                size="xs"
-                                add-ellipsis="true">
-                    </umb-button>
-
-                </umb-editor-sub-header-section>
-
-            </umb-editor-sub-header-content-right>
-        </umb-editor-sub-header>
-
-        <umb-box-content ng-if="vm.items.length > 0">
-            <umb-table items="vm.items"
-                       item-properties="vm.options.includeProperties"
-                       allow-select-all="vm.options.allowBulkDelete"
-                       on-select-all="vm.selectAll($event)"
-                       on-selected-all="vm.isSelectedAll()"
-                       on-select="vm.selectItem(item, $index, $event)"
-                       on-click="vm.clickItem(item)"
-                       on-sorting-direction="vm.isSortDirection(col, direction)"
-                       on-sort="vm.sort(field, allow, isSystem)">
-            </umb-table>
-        </umb-box-content>
-
-    </umb-box>
-
-    <umb-empty-state ng-show="(vm.items.length === 0)" position="center">
-        <div ng-show="vm.options.filter.length === 0"><localize key="scheduledContentDashboard_nothingScheduled">There are currently no scheduled content items.</localize></div>
-        <div ng-show="vm.options.filter.length > 0"><localize key="scheduledContentDashboard_noMatch">There are currently no matching scheduled content items</localize></div>
+    <umb-empty-state position="center">
+        <div ng-show="(!vm.items || vm.items.length === 0)"><localize key="scheduledContentDashboard_nothingScheduled">There are currently no scheduled content items.</localize></div>
     </umb-empty-state>
 
 </div>

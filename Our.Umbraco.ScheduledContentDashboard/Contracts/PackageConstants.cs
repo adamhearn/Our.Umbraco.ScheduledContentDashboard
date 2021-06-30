@@ -13,5 +13,15 @@ namespace Our.Umbraco.ScheduledContentDashboard.Contracts
         /// Package name
         /// </summary>
         public const string PackageName = "ScheduledContentDashboard";
+
+        /// <summary>
+        /// Release
+        /// </summary>
+        public const string Release = "Release";
+
+        /// <summary>
+        /// Expire
+        /// </summary>
+        public const string Expire = "Expire";
     }
 }

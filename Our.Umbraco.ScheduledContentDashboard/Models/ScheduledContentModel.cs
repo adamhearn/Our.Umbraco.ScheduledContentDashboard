@@ -46,11 +46,5 @@ namespace Our.Umbraco.ScheduledContentDashboard.Models
         /// </summary>
         [JsonProperty( PropertyName = "action" )]
         public string Action { get; set; }
-
-        /// <summary>
-        /// Gets or sets the culture type
-        /// </summary>
-        [JsonProperty( PropertyName = "culture" )]
-        public string Culture { get; set; }
     }
 }

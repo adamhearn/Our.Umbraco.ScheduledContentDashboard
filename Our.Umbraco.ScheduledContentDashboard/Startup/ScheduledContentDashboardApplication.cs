@@ -9,25 +9,26 @@ using System.Web.Routing;
 using EnsureThat;
 using Our.Umbraco.ScheduledContentDashboard.Contracts;
 using Our.Umbraco.ScheduledContentDashboard.Controllers;
-using Umbraco.Core.Composing;
+using Umbraco.Core;
 using Umbraco.Web;
-using Umbraco.Web.JavaScript;
+using Umbraco.Web.UI.JavaScript;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Startup
 {
     /// <summary>
     /// Implementation of <see cref="IComponent"/> for general application configuration
     /// </summary>
-    public class ScheduledContentDashboardComponent : IComponent
+    public class ScheduledContentDashboardApplication : ApplicationEventHandler
     {
         /// <summary>
-        /// Initializes the component
+        /// The application started event handler
         /// </summary>
-        /// <remarks>
-        /// Configures the routing variables for the feature
-        /// </remarks>
-        public void Initialize()
+        /// <param name="umbracoApplication">The umbraco application</param>
+        /// <param name="applicationContext">The application context</param>
+        protected override void ApplicationStarted( UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext )
         {
+            base.ApplicationStarted( umbracoApplication, applicationContext );
+
             // Wire up the parsing event
             ServerVariablesParser.Parsing += ServerVariablesParser_Parsing;
         }
@@ -53,23 +54,9 @@ namespace Our.Umbraco.ScheduledContentDashboard.Startup
                     {
                         Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.GetScheduledContent )[0] ) + nameof( ScheduledContentDashboardController.GetScheduledContent ).Substring( 1 ),
                         urlHelper.GetUmbracoApiService<ScheduledContentDashboardController>( nameof( ScheduledContentDashboardController.GetScheduledContent ), (RouteValueDictionary) null )
-                    },
-                    {
-                        Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.DeleteScheduleEntry )[0] ) + nameof( ScheduledContentDashboardController.DeleteScheduleEntry ).Substring( 1 ),
-                        urlHelper.GetUmbracoApiService<ScheduledContentDashboardController>( nameof( ScheduledContentDashboardController.DeleteScheduleEntry ), (RouteValueDictionary) null )
                     }
                 };
             e.Add( PackageConstants.PackageName, urlDictionary );
-        }
-
-        /// <summary>
-        /// Terminates the component
-        /// </summary>
-        /// <remarks>
-        /// No specific implementation required for this component
-        /// </remarks>
-        public void Terminate()
-        {
         }
     }
 }
