@@ -82,7 +82,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
             // Retrieve the content that is scheduled for release and map the results
             IEnumerable<IContent> results = _contentService.GetContentForRelease( DateTime.MaxValue );
             IEnumerable<ScheduledContentModel> model = _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Release, results ) );
-            
+
             // Retrieve the content that is scheduled for expiration and add to the results
             results = _contentService.GetContentForExpiration( DateTime.MaxValue );
             model = model.Concat( _mapper.Map( new Tuple<ContentScheduleAction, IEnumerable<IContent>>( ContentScheduleAction.Expire, results ) ) );
@@ -122,7 +122,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
                 return NotFound();
             }
 
-            // TODO - There's something not working with Umbraco's Content cache on cold start and removing content schedule entries
+            // There's something not working with Umbraco's Content cache on cold start and removing content schedule entries
             content = _contentService.GetById( contentId );
 
             // Clear the specific schedule entry and persist the change

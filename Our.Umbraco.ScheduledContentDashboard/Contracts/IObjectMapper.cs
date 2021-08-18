@@ -9,7 +9,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Contracts
     /// </summary>
     /// <typeparam name="TFrom">From type</typeparam>
     /// <typeparam name="TTo">To type</typeparam>
-    public interface IObjectMapper<TFrom, TTo>
+    public interface IObjectMapper<in TFrom, out TTo>
     {
         /// <summary>
         /// Map from one instance of an object to another
