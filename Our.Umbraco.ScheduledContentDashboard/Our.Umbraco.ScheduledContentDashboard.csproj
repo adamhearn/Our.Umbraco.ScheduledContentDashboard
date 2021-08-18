@@ -6,7 +6,7 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    <Version>2.0.1-pre</Version>
+    <Version>2.0.2-rc2</Version>
     <Authors>Adam Hearn</Authors>
     <Company>Our Umbraco</Company>
     <Product>Our.Umbraco.ScheduledContentDashboard</Product>
@@ -23,7 +23,8 @@
     <RepositoryUrl>https://github.com/adamhearn/Our.Umbraco.ScheduledContentDashboard</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco, umbraco-cms</PackageTags>
-    <PackageReleaseNotes>Initial release for Umbraco v9 beta 2</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated release for Umbraco v9 rc 2
+Please note that from v9 rc onwards the only way to install a package is via NuGet</PackageReleaseNotes>
     <AssemblyName>Our.Umbraco.ScheduledContentDashboard</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
