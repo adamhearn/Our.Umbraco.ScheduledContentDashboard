@@ -25,7 +25,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Mappers
         {
             // Validate the request
             Ensure.Any.IsNotNull( from, nameof( from ) );
-            
+
             // Project the results based on the request into the required model
             return from.Item2.SelectMany( x => x.ContentSchedule.FullSchedule.Where( s => s.Action == from.Item1 ).Select( s => new ScheduledContentModel()
             {

@@ -65,11 +65,9 @@ namespace Our.Umbraco.ScheduledContentDashboard.Startup
         /// <summary>
         /// Terminates the component
         /// </summary>
-        /// <remarks>
-        /// No specific implementation required for this component
-        /// </remarks>
         public void Terminate()
         {
+            // No specific implementation required for this component
         }
     }
 }

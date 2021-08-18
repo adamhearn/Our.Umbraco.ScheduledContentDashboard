@@ -12,7 +12,7 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Models;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Startup
-{ 
+{
     /// <summary>
     /// Implementation of <see cref="IUserComposer"/> to support the package
     /// </summary>
