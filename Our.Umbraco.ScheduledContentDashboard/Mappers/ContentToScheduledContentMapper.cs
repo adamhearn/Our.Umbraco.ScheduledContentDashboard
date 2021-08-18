@@ -32,7 +32,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Mappers
                 Id = s.Key,
                 ContentId = s.Id,
                 Name = s.Name,
-                Action = from.Item1.ToString(),
+                Action = from.Item1,
                 ScheduledDate = DateTime.SpecifyKind( from.Item1 == PackageConstants.Release ? s.ReleaseDate.Value: s.ExpireDate.Value, DateTimeKind.Local )
             } );
         }
