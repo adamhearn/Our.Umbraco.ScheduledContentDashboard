@@ -52,11 +52,11 @@ namespace Our.Umbraco.ScheduledContentDashboard.Startup
             Dictionary<string, object> urlDictionary = new Dictionary<string, object>
             {
                 {
-                Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.GetScheduledContent )[0] ) + nameof( ScheduledContentDashboardController.GetScheduledContent ).Substring( 1 ),
+                Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.GetScheduledContent )[0] ) + nameof( ScheduledContentDashboardController.GetScheduledContent )[ 1..],
                 _linkGenerator.GetUmbracoApiService<ScheduledContentDashboardController>( nameof( ScheduledContentDashboardController.GetScheduledContent ) )
                 },
                 {
-                Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.DeleteScheduleEntry )[0] ) + nameof( ScheduledContentDashboardController.DeleteScheduleEntry ).Substring( 1 ),
+                Char.ToLowerInvariant( nameof( ScheduledContentDashboardController.DeleteScheduleEntry )[0] ) + nameof( ScheduledContentDashboardController.DeleteScheduleEntry )[ 1..],
                 _linkGenerator.GetUmbracoApiService<ScheduledContentDashboardController>( nameof( ScheduledContentDashboardController.DeleteScheduleEntry ) )
                 }
             };

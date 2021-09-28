@@ -10,17 +10,15 @@ using Our.Umbraco.ScheduledContentDashboard.Mappers;
 using Our.Umbraco.ScheduledContentDashboard.Models;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
-using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Notifications;
-using Umbraco.Cms.Infrastructure.WebAssets;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Startup
 {
     /// <summary>
     /// Implementation of <see cref="IUserComposer"/> to support the package
     /// </summary>
-    public class ScheduledContentDashboardComposer : IUserComposer
+    public class ScheduledContentDashboardComposer : IComposer
     {
         /// <summary>
         /// Compose callback for the user composer

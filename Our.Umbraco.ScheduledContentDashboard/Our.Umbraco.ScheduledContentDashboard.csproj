@@ -6,7 +6,7 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    <Version>2.0.2-rc2</Version>
+    <Version>2.0.2</Version>
     <Authors>Adam Hearn</Authors>
     <Company>Our Umbraco</Company>
     <Product>Our.Umbraco.ScheduledContentDashboard</Product>
@@ -23,7 +23,7 @@
     <RepositoryUrl>https://github.com/adamhearn/Our.Umbraco.ScheduledContentDashboard</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>umbraco, umbraco-cms</PackageTags>
-    <PackageReleaseNotes>Updated release for Umbraco v9 rc 2
+    <PackageReleaseNotes>Updated release for Umbraco v9
 Please note that from v9 rc onwards the only way to install a package is via NuGet</PackageReleaseNotes>
     <AssemblyName>Our.Umbraco.ScheduledContentDashboard</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -63,7 +63,7 @@ Please note that from v9 rc onwards the only way to install a package is via NuG
 
   <ItemGroup>
     <PackageReference Include="Ensure.That" Version="10.1.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-rc002" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
   </ItemGroup>
 
 </Project>
