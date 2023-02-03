@@ -8,6 +8,7 @@ using EnsureThat;
 using Our.Umbraco.ScheduledContentDashboard.Contracts;
 using Our.Umbraco.ScheduledContentDashboard.Models;
 using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Services;
 
 namespace Our.Umbraco.ScheduledContentDashboard.Mappers
 {
@@ -16,6 +17,12 @@ namespace Our.Umbraco.ScheduledContentDashboard.Mappers
     /// </summary>
     public class ContentToScheduledContentMapper : IObjectMapper<Tuple<ContentScheduleAction, IEnumerable<IContent>>, IEnumerable<ScheduledContentModel>>
     {
+        private readonly IContentService contentService;
+
+        public ContentToScheduledContentMapper(IContentService contentService)
+        {
+            this.contentService = contentService;
+        }
         /// <summary>
         /// Map from one instance of an object to another
         /// </summary>
@@ -27,7 +34,7 @@ namespace Our.Umbraco.ScheduledContentDashboard.Mappers
             Ensure.Any.IsNotNull( from, nameof( from ) );
 
             // Project the results based on the request into the required model
-            return from.Item2.SelectMany( x => x.ContentSchedule.FullSchedule.Where( s => s.Action == from.Item1 ).Select( s => new ScheduledContentModel()
+            return from.Item2.SelectMany( x => contentService.GetContentScheduleByContentId(x.Id).FullSchedule.Where( s => s.Action == from.Item1 ).Select( s => new ScheduledContentModel()
             {
                 Id = s.Id,
                 ContentId = x.Id,
