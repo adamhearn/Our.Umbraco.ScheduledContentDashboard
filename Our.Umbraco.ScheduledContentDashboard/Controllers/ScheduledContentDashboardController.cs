@@ -126,9 +126,10 @@ namespace Our.Umbraco.ScheduledContentDashboard.Controllers
 
             // There's something not working with Umbraco's Content cache on cold start and removing content schedule entries
             content = _contentService.GetById( contentId );
-            var schedule = _contentService.GetContentScheduleByContentId(contentId);
+            var schedule = _contentService.GetContentScheduleByContentId( contentId );
+
             // Clear the specific schedule entry and persist the change
-            if ( String.IsNullOrWhiteSpace( culture ) )
+            if( String.IsNullOrWhiteSpace( culture ) )
             {
                 schedule.Clear( scheduleAction, scheduleEntryDate );
             }
